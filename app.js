@@ -1,27 +1,42 @@
-const countDownInput = document.querySelector('.countdown-input');
-const countDownClock = document.querySelector('.countdown-clock');
-const submit = document.querySelector('.submit');
+const countDown = (event) => {
+    const dateInput = document.querySelector('.date').value;
+    const countDate = new Date(dateInput).getTime();
+    const now = new Date().getTime();
+    const gap = countDate - now;
 
-let countDownDate = new Date(countDownInput.value).getTime();
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
 
-let setInt = setInterval(function() {
-    let now = new Date().getTime();
-    let distance = countDownDate - now;
+    const textDay = Math.floor(gap / day);
+    const textHour = Math.floor((gap % day) / hour);
+    const textMinute = Math.floor((gap % hour) / minute);
+    const textSecond = Math.floor((gap % minute) / second);
 
-    let days = Math.floor(distance / (1000 * 60 * 60 *  24));
-    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000)
-    
-    countDownClock.innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+    document.querySelector('.day').innerHTML = textDay;
+    document.querySelector('.hour').innerHTML = textHour;
+    document.querySelector('.minutes').innerHTML = textMinute;
+    document.querySelector('.seconds').innerHTML = textSecond;
 
-    if (distance < 0) {
-        clearInterval(setInt)
-        countDownClock.textContent = "EXPIRED";
-    }
-    console.log(countDownDate);
-}, 1000)
+    changeText();
+}
 
+function changeText() {
+    document.querySelector('h2').classList.add('hide');
+    document.querySelector('.countdown').style.fontSize = "4rem";
+    document.querySelector('.date').classList.add('hide');
+    document.querySelector('button').classList.add('hide');
+    const h4 = document.querySelectorAll('h4');
+    h4.forEach(element => {
+        element.style.opacity = '0.7';
+        element.style.fontSize = '2rem';
+    })
+}
 
+const dateButton = document.querySelector('button');
+dateButton.addEventListener('click', () => {
+    countDown()
+    setInterval(countDown, 1000);
+})
 
-submit.addEventListener('click', setInt)

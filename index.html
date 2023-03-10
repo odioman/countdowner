@@ -8,8 +8,27 @@
     <title>Countdowner</title>
 </head>
 <body>
-    <input type="text" class="countdown-input" placeholder="Countdown to Month Day, Year 23:59:59">
-    <button class="submit">Submit</button>
-    <h2 class="countdown-clock"></h2>
+    <h2>Count Down</h2>
+    <div class="countdown">
+        <div class="container-day">
+            <h3 class="day"></h3>
+            <h4>Days</h4>
+        </div>
+        <div class="container-hour">
+            <h3 class="hour"></h3>
+            <h4>Hours</h4>
+        </div>
+        <div class="container-minutes">
+            <h3 class="minutes"></h3>
+            <h4>Minutes</h4>
+        </div>
+        <div class="container-seconds">
+            <h3 class="seconds"></h3>
+            <h4>Seconds</h4>
+        </div>
+    </div>
+    <input type="datetime-local" name="date" id="date" class="date">
+    <button for="date">Submit</button>
+    <script src="app.js"></script>
 </body>
 </html>
